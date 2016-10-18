@@ -21,7 +21,8 @@ public class hhtrans {
 /*
 A is a m*n matrix, and it can be decomposed as A=PJQ.
 P and Q are unitary matrices and J is an m*n bidiagonal.
-returnlist cantains three matrix PJQ.
+returnlist cantains three matrix PJQ. P is a m*m matrix
+and Q is a n*n matrix.
 */
     public List<Matrix> HouseholdTransformation(Matrix A) {
         Matrix P_original;
