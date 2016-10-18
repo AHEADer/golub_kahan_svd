@@ -289,6 +289,29 @@ public class Matrix implements Serializable{
         }
     }
 
+    //if mode is True,cut by col; if False, cut by row
+    public List<Vec> cutByColOrRow(boolean mode) {
+        List<Vec> vec_list = new ArrayList<>();
+        if (mode) {
+            for (int i = 0; i < col; i++) {
+                Vec tmp = getCol(i);
+                vec_list.add(i, tmp);
+            }
+        }
+        else {
+            for (int j = 0; j < row; j++) {
+                Vec tmp2 = getRow(j);
+                vec_list.add(j, tmp2);
+            }
+        }
+        return vec_list;
+    }
+
+    public Matrix constructHermitianMatrix(List<Vec> refer_vec_list, boolean mode) {
+        Matrix result = new Matrix(1,1);
+        return result;
+    }
+
     public static void main(String[] args) throws IOException, InterruptedException {
 
     }
