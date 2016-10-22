@@ -41,6 +41,7 @@ and Q is a n*n matrix.
             V = V.divide(V.norm());
             Matrix H = new Matrix(size, size);
             H.formIdentityMatrix();
+            H = matrixSubtract(H, matrixMultiply(2,outProduct(V, V)));
 
         }
         return return_list;
@@ -80,4 +81,27 @@ and Q is a n*n matrix.
         return result;
     }
 
+    public static Matrix matrixMultiply(double a, Matrix b) {
+        Matrix result = new Matrix(b.row, b.col);
+        for (int i = 0; i < b.row; i++) {
+            for (int j = 0; j < b.col; j++) {
+                result.set(i, j, a * b.get(i, j));
+            }
+        }
+        return result;
+    }
+
+    //a*bT
+    public static Matrix outProduct(Vec a, Vec b) {
+        Matrix result = new Matrix(a.getSize(), b.getSize());
+        for (int i = 0; i < a.getSize(); i++) {
+            for (int j = 0; j < b.getSize(); j++) {
+                result.set(i, j, a.get(i) * b.get(j));
+            }
+        }
+        return result;
+    }
+    public static Vec renderVec(Matrix a, Vec b) {
+        if (a.row!=)
+    }
 }
