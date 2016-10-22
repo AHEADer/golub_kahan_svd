@@ -289,6 +289,14 @@ public class Matrix implements Serializable{
         }
     }
 
+    public void show() {
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                System.out.println(matrix[i][j]);
+            }
+        }
+    }
+
     //if mode is True,cut by col; if False, cut by row
     public List<Vec> cutByColOrRow(boolean mode) {
         List<Vec> vec_list = new ArrayList<>();
@@ -305,6 +313,21 @@ public class Matrix implements Serializable{
             }
         }
         return vec_list;
+    }
+
+    public void formIdentityMatrix() {
+        if (col!=row)
+            throw new IllegalArgumentException();
+        else {
+            for (int i = 0; i < row; i++)
+                for (int j = 0; j < col; j++) {
+                    if (i == j)
+                        matrix[i][j] = 1;
+                    else
+                        matrix[i][j] = 0;
+
+                }
+        }
     }
 
     public Matrix constructHermitianMatrix(List<Vec> refer_vec_list, boolean mode) {

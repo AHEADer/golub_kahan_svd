@@ -64,6 +64,13 @@ public class Vec implements Serializable{
         return Vec.fromList(result);
     }
 
+    public Vec multiply(double factor) {
+        ArrayList<Double> result = new ArrayList<>();
+        for(double value : vector) {
+            result.add(value*factor);
+        }
+        return Vec.fromList(result);
+    }
     @Override
     public String toString() {
         String str = vector.toString();
@@ -82,6 +89,16 @@ public class Vec implements Serializable{
         for(double value : list)
             vec.set(value);
         return vec;
+    }
+    public Vec formUnitVec(int i) {
+        Vec UnitVec = new Vec(size);
+        for (int j = 0;j < size;j++) {
+            if (j!=i)
+                UnitVec.set(j, 0);
+            else
+                UnitVec.set(j, 1);
+        }
+        return UnitVec;
     }
 
     public static void main(String[] args) {
