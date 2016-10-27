@@ -25,7 +25,7 @@
         <module name="golub_kahan_svd" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="1.7">
       <module name="golub_kahan_svd" target="1.7" />
     </bytecodeTargetLevel>
   </component>

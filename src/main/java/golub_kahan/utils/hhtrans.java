@@ -27,13 +27,17 @@ and Q is a n*n matrix.
 */
     public static List<Matrix> HouseholdTransformation(Matrix A) {
         Matrix P_original = new Matrix(A.row, A.row);
+        Matrix P = new Matrix(A.row, A.row);
+        P.formIdentityMatrix();
         Matrix Q_original = new Matrix(A.col, A.col);
+        Matrix Q = new Matrix(A.col, A.col);
+        Q.formIdentityMatrix();
         List<Matrix> return_list = new ArrayList<>();
-        List<Vec> vec_for_P = A.cutByColOrRow(true);
+        List<Vec> vec_for_P = new ArrayList<>();
         List<Vec> vec_for_Q = A.cutByColOrRow(false);
         A.show();
-        for (int i = 0;i < vec_for_P.size();i++) {
-            Vec currentVec = vec_for_P.get(i);
+        for (int i = 0; i < A.row&&i < A.col; i++) {
+            Vec currentVec = A.getCol(i);
             int size = currentVec.getSize();
             Vec UnitVec = currentVec.formUnitVec(i);
             double sigma = currentVec.norm();
@@ -41,9 +45,28 @@ and Q is a n*n matrix.
             V = V.divide(V.norm());
             Matrix H = new Matrix(size, size);
             H.formIdentityMatrix();
-            H = matrixSubtract(H, matrixMultiply(2,outProduct(V, V)));
+            P_original = matrixSubtract(H, matrixMultiply(2,outProduct(V, V)));
+            A = P_original.dot(A);
+            P = P.dot(P_original);
 
+            currentVec = A.getRow(i);
+            size = currentVec.getSize();
+            UnitVec = currentVec.formUnitVec(i);
+            sigma = currentVec.norm();
+            V = vecAdd(currentVec, UnitVec.multiply(sigma));
+            V = V.divide(V.norm());
+            H = new Matrix(size, size);
+            H.formIdentityMatrix();
+            Q_original = matrixSubtract(H, matrixMultiply(2,outProduct(V, V)));
+            A = A.dot(Q_original);
+            Q = Q.dot(Q_original);
         }
+        A.show();
+
+        return_list.add(0, P);
+        return_list.add(1, A);
+        return_list.add(2, Q);
+
         return return_list;
     }
 
@@ -102,6 +125,12 @@ and Q is a n*n matrix.
         return result;
     }
     public static Vec renderVec(Matrix a, Vec b) {
-        if (a.row!=)
+        if (a.col!=b.getSize())
+            throw new IllegalArgumentException();
+        Vec result = new Vec(a.row);
+        for (int i = 0; i < a.row; i++) {
+            result.set(i, b.dot(a.getRow(i)));
+        }
+        return result;
     }
 }
